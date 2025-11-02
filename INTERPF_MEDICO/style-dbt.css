@@ -53,7 +53,7 @@ textarea {
     margin-bottom: 10px;
 }
 .full-width-group {
-    grid-template-columns: 1fr 1fr 1fr; /* 3 columnas para mail/tel/dir */
+    grid-template-columns: 1fr 1fr 1fr; 
 }
 .form-group label, .form-group input, .form-group select {
     width: auto;
@@ -69,39 +69,90 @@ textarea {
     min-width: 150px;
     width: auto;
 }
-/* Estilo Específico: Alineación Vertical Antropométrica */
+/* CORRECCIÓN 1: Alineación Vertical Antropométrica */
 .antropometricos-vertical {
     display: flex;
-    flex-direction: column; /* Alinea los elementos en una columna */
-    height: 350px; /* Suficiente para mostrar todos los campos */
-    gap: 10px;
+    flex-direction: column; 
+    height: auto; /* Ajustamos altura a contenido */
+    max-height: 250px;
+    gap: 5px;
     padding: 10px;
-    border: 1px dashed #ccc;
+    border: 1px solid #dee2e6;
     border-radius: 5px;
     margin-bottom: 20px;
 }
-.antropometricos-vertical label, .antropometricos-vertical input {
-    flex: none; /* Desactiva la flexibilidad para que ocupen poco ancho */
-    width: 250px; /* Ancho fijo para mejorar la visualización en columna */
+.antrop-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 300px; /* Ancho fijo para mejorar la visualización en columna */
+}
+.antropometricos-vertical label {
+    flex: none;
+    width: 150px;
+    margin: 0;
+    font-size: 0.9em;
+}
+.antropometricos-vertical input {
+    flex-grow: 1;
+    margin: 0;
 }
 
-/* Estilo para la Grilla de Medicamentos */
+/* CORRECCIÓN 2: Factores Modificables (Evita Superposición) */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Aumenta el espacio horizontal */
+    row-gap: 15px; /* Espacio vertical */
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+.checkbox-group label {
+    display: inline-block;
+    width: auto;
+    font-weight: normal;
+    margin-top: 0;
+}
+.checkbox-group select, .checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+.large-gap > * {
+    margin-right: 10px; /* Espacio extra para los select/checkboxes */
+}
+
+/* CORRECCIÓN 3: Grilla de Medicamentos */
 .medication-grid {
     display: grid;
-    grid-template-columns: 1.5fr 2fr 3fr; /* Categoría, Droga, Dosis/Horario */
-    gap: 10px;
+    grid-template-columns: 1.5fr 3fr 2fr; /* Categoría, Drogas (Checkboxes), Dosis/Horario */
+    gap: 15px 10px;
     margin-bottom: 20px;
 }
-.medication-grid label, .medication-grid input, .medication-grid select {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-.grid-header {
+.grid-header-cat {
     font-weight: bold;
     color: #007bff;
     border-bottom: 1px solid #007bff;
     padding-bottom: 5px;
+    text-align: center;
 }
+.medication-grid label, .medication-grid input, .medication-grid select {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 0.9em;
+    align-self: center; /* Centra verticalmente la etiqueta */
+}
+.checkbox-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 15px; /* Espacio entre los checkboxes */
+    font-weight: normal;
+}
+.checkbox-list label {
+    display: inline-block;
+    font-weight: normal;
+}
+
 /* Estilo para la Tabla de Laboratorio (4 Columnas) */
 .lab-table {
     display: grid;
@@ -114,41 +165,6 @@ textarea {
     margin-bottom: 0;
     width: 100%;
 }
-.btn-small {
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9em;
-    width: 100px;
-}
-/* Estilo Modal (POP-UP) */
-.modal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 10; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.4); 
-}
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; 
-    max-width: 400px;
-    border-radius: 8px;
-    text-align: left;
-}
-.phq-section label, .phq-section select {
-    flex: none;
-    width: 45%;
-}
 .submit-btn {
     background-color: #28a745;
     color: white;
@@ -159,4 +175,22 @@ textarea {
     font-size: 1.1em;
     margin-top: 20px;
     width: 100%;
+}
+.btn-mdcalc {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-decoration: none;
+    color: #007bff;
+    text-align: center;
+    display: inline-block;
+}
+.instruction-note {
+    font-size: 0.85em;
+    color: #6c757d;
+    margin-top: -10px;
+    margin-bottom: 15px;
 }
