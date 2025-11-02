@@ -45,11 +45,15 @@ input[type="text"], input[type="number"], input[type="email"], input[type="date"
 textarea {
     resize: vertical;
 }
+/* Estilos para las secciones de 4 columnas */
 .form-group {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
     margin-bottom: 10px;
+}
+.full-width-group {
+    grid-template-columns: 1fr 1fr 1fr; /* 3 columnas para mail/tel/dir */
 }
 .form-group label, .form-group input, .form-group select {
     width: auto;
@@ -60,27 +64,90 @@ textarea {
     gap: 20px;
     margin-bottom: 15px;
 }
-.form-section label, .form-section input, .form-section select {
-    flex: 1 1 150px; /* Asegura que los campos sean flexibles */
-    min-width: 100px;
+.form-section label, .form-section input, .form-section select, .form-section textarea {
+    flex: 1 1 200px; 
+    min-width: 150px;
     width: auto;
 }
-.checkbox-group {
+/* Estilo Específico: Alineación Vertical Antropométrica */
+.antropometricos-vertical {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    align-items: center;
+    flex-direction: column; /* Alinea los elementos en una columna */
+    height: 350px; /* Suficiente para mostrar todos los campos */
+    gap: 10px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
     margin-bottom: 20px;
-    font-size: 0.9em;
 }
-.checkbox-group input[type="checkbox"] {
-    width: auto;
+.antropometricos-vertical label, .antropometricos-vertical input {
+    flex: none; /* Desactiva la flexibilidad para que ocupen poco ancho */
+    width: 250px; /* Ancho fijo para mejorar la visualización en columna */
 }
+
+/* Estilo para la Grilla de Medicamentos */
+.medication-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 3fr; /* Categoría, Droga, Dosis/Horario */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.medication-grid label, .medication-grid input, .medication-grid select {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.grid-header {
+    font-weight: bold;
+    color: #007bff;
+    border-bottom: 1px solid #007bff;
+    padding-bottom: 5px;
+}
+/* Estilo para la Tabla de Laboratorio (4 Columnas) */
 .lab-table {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     margin-bottom: 20px;
+}
+.lab-table label, .lab-table input {
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+}
+.btn-small {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em;
+    width: 100px;
+}
+/* Estilo Modal (POP-UP) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 10; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 400px;
+    border-radius: 8px;
+    text-align: left;
+}
+.phq-section label, .phq-section select {
+    flex: none;
+    width: 45%;
 }
 .submit-btn {
     background-color: #28a745;
