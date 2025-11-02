@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>INTERPF - Ficha de Ingreso DBT2</title>
+    <title>INTERPF - Ficha de Ingreso y Seguimiento DBT2</title>
     <link rel="stylesheet" href="style-dbt.css">
 </head>
 <body>
@@ -10,15 +10,12 @@
         <h1>INTERPF - Ficha de Ingreso DBT2 (Dr. Giorgini)</h1>
     </header>
     <form id="ficha-ingreso">
-        <h2>A. Datos Epidemiológicos</h2>
+        <h2>A. Datos Identificatorios y Logísticos</h2>
         <div class="form-group">
             <label>Fecha de Inicio de Seguimiento:</label>
             <input type="date" required>
             <label>Lugar:</label>
             <input type="text" value="Hospital Alemán" required>
-        </div>
-
-        <div class="form-group">
             <label>Nombre y Apellido:</label>
             <input type="text" required>
             <label>Documento de Identidad:</label>
@@ -27,110 +24,177 @@
 
         <div class="form-group">
             <label>Fecha de Nacimiento:</label>
-            <input type="date">
-            <label>Sexo:</label>
-            <select><option>Femenino</option><option>Masculino</option></select>
+            <input type="date" id="fecha-nacimiento">
             <label>Edad:</label>
-            <input type="text" disabled placeholder="Automático">
+            <input type="text" disabled placeholder="Automático" id="edad-auto">
+            <label>Sexo:</label>
+            <select><option>Femenino</option><option>Masculino</option><option>Otro</option></select>
+            <label>Médico Tratante:</label><input type="text" value="Dr. Julio Giorgini">
+            <label>Médico que completa la Ficha:</label><input type="text">
         </div>
         
-        <div class="form-group">
+        <div class="form-group full-width-group">
+            <label>Dirección/Ciudad/Pueblo, etc:</label><input type="text">
             <label>Teléfono:</label><input type="tel">
             <label>Mail:</label><input type="email">
-            <label>Médico Tratante:</label><input type="text" value="Dr. Julio Giorgini">
         </div>
 
         <hr>
         <h2>B. Antecedentes y Factores de Riesgo Modificables</h2>
         <div class="form-section">
-            <label>Años de Dx DBT:</label><input type="number" style="width: 80px;">
-            <label>Altura (m):</label><input type="number" step="0.01" style="width: 80px;">
-            <label>Peso (Kg):</label><input type="number" step="0.1" style="width: 80px;">
-            <label>BMI:</label><input type="text" disabled placeholder="Calculado">
-            <label>Perím. Cintura (cm):</label><input type="number" style="width: 80px;">
-            <label>Relación Cintura/Altura:</label><input type="text" disabled placeholder="Calculado">
+            <label>Años de Dx DBT:</label><input type="number" style="width: 100px;">
+            <label>Tipo de Diabetes:</label><select><option>Tipo 2</option><option>Tipo 1</option></select>
+            <label>Antecedentes CV:</label><input type="text" placeholder="IAM, ACV, IC, etc.">
         </div>
 
+        <h3>Parámetros Antropométricos</h3>
+        <div class="antropometricos-vertical">
+            <label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;">
+            <label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;">
+            <label>BMI:</label><input type="text" disabled placeholder="Calculado" id="bmi-auto">
+            <label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;">
+            <label>Relación Cintura/Altura:</label><input type="text" disabled placeholder="Calculado" id="rca-auto">
+        </div>
+
+        <h3>Factores Modificables y Estilo de Vida</h3>
         <div class="checkbox-group">
-            <label>Tabaquismo:</label>
-            <select>
-                <option>Nunca fumador</option>
-                <option>Ex-fumador</option>
-                <option>Fumador actual</option>
-            </select>
-            <label>Consumo Alcohol:</label>
-            <select>
-                <option>Abstinente</option>
-                <option>Consumo social</option>
-                <option>Consumo de riesgo</option>
-            </select>
-            <label>Dieta:</label><select><option>Normal</option><option>Alta en azúcares</option></select>
+            <label>Tabaquismo:</label><select><option>Actual</option><option>Ex-fumador</option><option>Nunca</option></select>
+            <label>Consumo Alcohol:</label><select><option>Abstinente</option><option>Social</option><option>Riesgo</option></select>
+            <label>Dieta - Frutas y Verduras Diarias:</label> <input type="checkbox">
+            <label>Dieta - Azúcares Diarios:</label> <input type="checkbox">
+            <label>Hace correctamente Conteo de Carbohidratos:</label> <input type="checkbox">
             <label>Ejercicio Aeróbico (150' min/sem):</label> <input type="checkbox">
-            <label>Riesgo SAOS (STOP BANG):</label> <input type="text" disabled placeholder="Puntuación">
+        </div>
+        
+        <div class="form-section">
+            <label>Antecedentes Quirúrgicos:</label><textarea rows="1"></textarea>
+            <label>Internaciones (Causas):</label><textarea rows="1"></textarea>
+            <label>Patología Respiratoria:</label><textarea rows="1"></textarea>
         </div>
         
         <hr>
-        <h2>C. Factores Psicosociales y Cribado (PHQ-2)</h2>
+        <h2>C. Factores Psicosociales y Sueño</h2>
         <div class="form-section">
-             <label>PHQ-2 P1 (Interés):</label>
-             <select><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-             <label>PHQ-2 P2 (Deprimido):</label>
-             <select><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-             <label>Puntuación PHQ-2:</label><input type="text" disabled placeholder="Automático">
+            <label>Vive solo o con familia:</label><input type="text" placeholder="Con quién vive si aplica">
+            <label>Nivel de Escolaridad:</label><select><option>Primario</option><option>Secundario</option></select>
+            <label>Vivienda en Zona Vulnerable:</label> <input type="checkbox">
+            <label>Recibe Planes Sociales:</label> <input type="checkbox">
+        </div>
+        
+        <div class="form-section">
+            <label>Horas de Sueño:</label><input type="number" style="width: 100px;">
+            <label>Riesgo SAOS (STOP BANG):</label> 
+            <button type="button" class="btn-small" onclick="mostrarStopBang()">CÁLCULO (Puntaje)</button>
+            <input type="text" disabled placeholder="Automático" style="width: 100px;">
+        </div>
+
+        <h3>Cribado de Depresión (PHQ-2)</h3>
+        <div class="form-section phq-section">
+             <label>P1: Poco interés o placer en hacer cosas (0-3):</label>
+             <select id="phq2-p1"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+             <label>P2: Se ha sentido decaído/a, deprimido/a (0-3):</label>
+             <select id="phq2-p2"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+             <label>Puntuación PHQ-2:</label><input type="text" disabled placeholder="Automático" id="phq2-auto">
         </div>
 
         <hr>
-        <h2>D. Tratamiento Actual (Simplified for Mockup)</h2>
-        <div class="form-section">
-            <label>Metformina:</label><input type="text" placeholder="Dosis/Horario">
-            <label>Insulina Detemir:</label><input type="text" placeholder="Dosis/Horario">
-            <label>Antihipertensivo:</label><input type="text" placeholder="Dosis/Horario">
+        <h2>D. Tratamiento Actual (Completo)</h2>
+        <div class="medication-grid">
+            <label class="grid-header">Categoría</label>
+            <label class="grid-header">Droga / Opciones</label>
+            <label class="grid-header">Dosis y Horario (Texto Libre)</label>
+
+            <label>ANTIHIPERTENSIVOS:</label>
+            <select><option>Enalapril</option><option>Losartán</option></select>
+            <input type="text" placeholder="Dosis (mg) y Horario (Ej: 10mg Desayuno)">
+            
+            <label>HIPOLIPEMIANTES:</label>
+            <select><option>Atorvastatina</option><option>Ezetimibe</option></select>
+            <input type="text" placeholder="Dosis (mg) y Horario">
+
+            <label>HIPOGLUCEMIANTES ORALES:</label>
+            <select><option>Metformina</option><option>Sitagliptina (iDPP4)</option></select>
+            <input type="text" placeholder="Dosis (mg) y Horario">
+
+            <label>INSULINAS Y ANÁLOGOS:</label>
+            <select><option>Detemir</option><option>Glargina</option><option>Insulina Rápida (Corrección)</option></select>
+            <input type="text" placeholder="Dosis Diaria y/o Corrección (Sí/No)">
+            
+            <label>MEDICACIÓN PSIQUIÁTRICA:</label>
+            <input type="text" placeholder="Ej: Sertralina, Alprazolam">
+            <input type="text" placeholder="Dosis y Horario">
         </div>
         
         <hr>
         <h2>E. Examen Físico y Laboratorio</h2>
         <div class="form-section">
-            <label>FC:</label><input type="number" style="width: 50px;">
-            <label>TA:</label><input type="text" style="width: 80px;">
-            <label>Piel:</label>
-            <select>
-                <option>Normal</option>
-                <option>Acantosis nigricans</option>
-                <option>Úlceras</option>
-            </select>
-            <label>Cardiovascular (Pulsos):</label><input type="text" placeholder="Normal/Disminuidos">
+            <label>FC (lpm):</label><input type="number" style="width: 80px;">
+            <label>TA (mmHg):</label><input type="text" style="width: 100px;">
         </div>
-        
-        <h3>Laboratorio al Inicio del Seguimiento</h3>
+
+        <h3>Hallazgos Específicos</h3>
+        <div class="form-section">
+            <label>PIEL:</label><textarea rows="1" placeholder="Normal / Acantosis / Úlceras / Dermopatía"></textarea>
+            <label>CARDIOVASCULAR:</label><textarea rows="1" placeholder="Soplos, Pulsos periféricos, Signos de IC"></textarea>
+            <label>RESPIRATORIO:</label><textarea rows="1" placeholder="Entrada de aire, Sibilancias, Rales"></textarea>
+            <label>NEUROLÓGICO:</label><textarea rows="1" placeholder="Nivel de conciencia, Déficit motor/sentitivo"></textarea>
+        </div>
+
+        <h3>Laboratorio al Inicio del Seguimiento (Variables Completas)</h3>
         <div class="lab-table">
-            <label>Glucemia:</label><input type="text">
-            <label>HbA1c:</label><input type="text">
-            <label>Creatinina:</label><input type="text">
-            <label>Perfil Lipídico:</label><input type="text">
+            <label>HEMOGRAMA:</label><input type="text">
+            <label>GLUCEMIA:</label><input type="text">
+            <label>HBA1C:</label><input type="text">
+            <label>UREA:</label><input type="text">
+            <label>CREATININA:</label><input type="text">
+            <label>IONOGRAMA:</label><input type="text">
+            <label>HEPATOGRAMA:</label><input type="text">
+            <label>PERFIL LIPÍDICO:</label><input type="text">
             <label>TSH:</label><input type="text">
-            <label>Vitamina D:</label><input type="text">
+            <label>ERITROSEDIMENTACIÓN:</label><input type="text">
+            <label>PCR:</label><input type="text">
+            <label>FERREMIA:</label><input type="text">
+            <label>FERRITINA:</label><input type="text">
+            <label>VITAMINA D:</label><input type="text">
+            <label>VITAMINA B12:</label><input type="text">
         </div>
 
         <hr>
-        <h2>F. Planificación de Seguimiento</h2>
-        <div class="form-section">
-            <label>Nuevo Control:</label>
-            <select>
-                <option>Presencial</option>
-                <option>Virtual (Zoom/Video)</option>
-                <option>Mail</option>
-            </select>
-            <label>Fecha de Nuevo Control (ALARMA):</label>
+        <h2>F. Planificación de Seguimiento (Alarma de Contacto)</h2>
+        <div class="form-section full-width-group">
+            <label>NUEVO CONTROL:</label>
+            <select><option>Presencial</option><option>Virtual (Zoom/Video)</option><option>Mail</option></select>
+            <label>FECHA DE NUEVO CONTROL (ALARMA):</label>
             <input type="date" required>
         </div>
         
-        <label>Indicaciones:</label>
-        <textarea rows="3" placeholder="Ej: Control de glucemias, ajustar dosis de Metformina, etc."></textarea>
+        <label>Indicaciones (INTERPAC):</label>
+        <textarea rows="3" placeholder="Estas indicaciones se verán en la plataforma del paciente."></textarea>
         
-        <label>Objetivos para Próximo Control:</label>
+        <label>Objetivos para Próximo Control (INTERPAC):</label>
         <textarea rows="2" placeholder="Ej: HbA1c < 7.0, Bajar 1 Kg."></textarea>
         
         <button type="submit" class="submit-btn">Guardar Ficha de Ingreso</button>
     </form>
+    
+    <div id="stop-bang-modal" class="modal">
+        <div class="modal-content">
+            <h4>Cuestionario STOP BANG</h4>
+            <p>Pregunta 1 (S): ¿Sueña fuerte? <input type="checkbox"></p>
+            <p>Pregunta 2 (T): ¿Se siente cansado/a durante el día? <input type="checkbox"></p>
+            <button onclick="cerrarModal()">Calcular y Cerrar</button>
+        </div>
+    </div>
+    
+    <script>
+        // Funciones dummy de JS que el desarrollador debe implementar
+        function mostrarStopBang() {
+            document.getElementById('stop-bang-modal').style.display = 'block';
+        }
+        function cerrarModal() {
+            // Aquí iría el código para calcular el puntaje y cerrar
+            document.getElementById('stop-bang-modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
