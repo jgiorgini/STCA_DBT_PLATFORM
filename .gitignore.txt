@@ -1,0 +1,5 @@
+# Ignorar archivos generados por el sistema operativo o editores
+.DS_Store
+Thumbs.db
+# Ignorar carpetas de dependencias (si las hubiera)
+/node_modules
