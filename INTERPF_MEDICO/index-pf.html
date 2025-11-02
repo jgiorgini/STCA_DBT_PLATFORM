@@ -1,197 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>INTERPF - Ficha de Ingreso y Seguimiento DBT2</title>
-    <link rel="stylesheet" href="style-dbt.css">
-    </head>
-<body>
-    <header>
-        <h1>INTERPF - Ficha de Ingreso y Seguimiento DBT2 (Dr. Giorgini)</h1>
-    </header>
-    <form id="ficha-ingreso">
-        <h2>A. Datos Identificatorios y Logísticos</h2>
-        <div class="form-group">
-            <label>Fecha de Inicio de Seguimiento:</label>
-            <input type="date" required>
-            <label>Lugar:</label>
-            <input type="text" value="Hospital Alemán" required>
-            <label>Nombre y Apellido:</label>
-            <input type="text" required>
-            <label>Documento de Identidad:</label>
-            <input type="text" required>
-        </div>
+<hr>
+        <h2>D. Tratamiento Actual (Listado Detallado)</h2>
+        <p class="instruction-note">Marque las drogas que usa el paciente. Complete la Dosis y el número de veces que la toma por día.</p>
 
-        <div class="form-group">
-            <label>Fecha de Nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-            <label>Edad:</label>
-            <input type="text" disabled placeholder="Automático" id="edad-auto">
-            <label>Sexo:</label>
-            <select><option>Femenino</option><option>Masculino</option><option>Otro</option></select>
-            <label>Médico Tratante:</label><input type="text" value="Dr. Julio Giorgini">
-        </div>
-        
-        <div class="vertical-contact-group">
-            <div class="contact-item">
-                <label>Dirección/Ciudad/Pueblo, etc:</label>
-                <input type="text" style="width: 100%;">
-            </div>
-            <div class="contact-item">
-                <label>Teléfono:</label>
-                <input type="tel" style="width: 100%;">
-            </div>
-            <div class="contact-item">
-                <label>Mail:</label>
-                <input type="email" style="width: 100%;">
-            </div>
-        </div>
-        
-        <hr>
-        <h2>B. Antecedentes y Factores de Riesgo Modificables</h2>
-        <div class="form-section">
-            <label>Años de Dx DBT:</label><input type="number" style="width: 100px;">
-            <label>Tipo de Diabetes:</label><select><option>Tipo 2</option><option>Tipo 1</option></select>
-            <label>Antecedentes CV:</label><input type="text" placeholder="IAM, ACV, IC, etc.">
-            <label>VIH:</label><select><option>No</option><option>Sí</option></select>
-        </div>
-
-        <h3>Parámetros Antropométricos</h3>
-        <div class="antropometricos-vertical">
-            <div class="antrop-item">
-                <label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;">
-            </div>
-            <div class="antrop-item">
-                <label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;">
-            </div>
-            <div class="antrop-item">
-                <label>BMI:</label>
-                <a href="https://www.mdcalc.com/calc/29/body-mass-index-bmi-body-surface-area-bsa" target="_blank" class="btn-mdcalc-inline">CALCULAR</a>
-                <input type="text" id="bmi-manual" style="width: 80px;">
-            </div>
-            <div class="antrop-item">
-                <label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;">
-            </div>
-            <div class="antrop-item">
-                <label>Relación Cintura/Altura:</label><input type="text" placeholder="Manual" style="width: 80px;">
-            </div>
-        </div>
-
-        <h3>Factores Modificables y Estilo de Vida</h3>
-        <div class="checkbox-group large-gap">
-            <label>Tabaquismo:</label><select><option>Actual</option><option>Ex-fumador</option><option>Nunca</option></select>
-            <label>Consumo Alcohol:</label><select><option>Abstinente</option><option>Social</option><option>Riesgo</option></select>
-            <label>Dieta - Frutas y Verduras Diarias:</label> <input type="checkbox">
-            <label>Dieta - Azúcares Diarios:</label> <input type="checkbox">
-            <label>Hace correctamente Conteo de Carbohidratos:</label> <input type="checkbox">
-            <label>Ejercicio Aeróbico (150' min/sem):</label> <input type="checkbox">
-        </div>
-        
-        <div class="form-section multi-line-inputs">
-            <div class="input-item">
-                <label>Antecedentes Quirúrgicos:</label><textarea rows="1"></textarea>
-            </div>
-            <div class="input-item">
-                <label>Internaciones (Causas):</label><textarea rows="1"></textarea>
-            </div>
-            <div class="input-item">
-                <label>Patología Respiratoria:</label><textarea rows="1"></textarea>
-            </div>
-        </div>
-        
-        <hr>
-        <h2>C. Factores Psicosociales y Sueño</h2>
-        <div class="form-section">
-            <label>Vive solo o con familia:</label><input type="text" placeholder="Con quién vive si aplica">
-            <label>Nivel de Escolaridad:</label><select><option>Primario</option><option>Secundario</option></select>
-            <label>Vivienda en Zona Vulnerable:</label> <input type="checkbox">
-            <label>Recibe Planes Sociales:</label> <input type="checkbox">
-        </div>
-        
-        <div class="form-section">
-            <label>Horas de Sueño:</label><input type="number" style="width: 80px;">
-            <label>Riesgo SAOS (STOP BANG):</label> 
-            <a href="https://www.mdcalc.com/calc/3992/stop-bang-score-obstructive-sleep-apnea" target="_blank" class="btn-mdcalc-inline">CALCULAR</a>
-            <input type="text" placeholder="Puntaje" style="width: 80px;">
-        </div>
-
-        <h3>Cribado de Depresión (PHQ-2)</h3>
-        <div class="form-section phq-section">
-             <label>Puntuación PHQ-2:</label>
-             <a href="https://aidsetc.org/sites/default/files/resources_files/PHQ-2_Spanish.pdf" target="_blank" class="btn-mdcalc-inline">VER GUÍA</a>
-             <input type="text" placeholder="Puntaje (0-6)" style="width: 80px;">
-        </div>
-
-        <hr>
-        <h2>D. Tratamiento Actual (Checkboxes y Texto)</h2>
-        <p class="instruction-note">Marque las drogas que usa el paciente y complete dosis/horario en el campo de texto.</p>
-
-        <div class="medication-grid">
-            <label class="grid-header-cat">Categoría</label>
-            <label class="grid-header-cat">Drogas Comunes</label>
-            <label class="grid-header-cat">Dosis y Horario</label>
-
-            <label>HIPOGLUCEMIANTES:</label>
-            <div class="checkbox-list">
-                <input type="checkbox" id="metf"><label for="metf">Metformina</label>
-                <input type="checkbox" id="sitag"><label for="sitag">Sitagliptina (iDPP4)</label>
-                <input type="checkbox" id="empa"><label for="empa">Empagliflozina (iSGLT2)</label>
-                <input type="checkbox" id="sema"><label for="sema">Semaglutida (aGLP1)</label>
-            </div>
-            <input type="text" placeholder="Dosis (mg) y Horario">
+        <div class="medication-list-vertical">
             
-            </div>
-        
-        <hr>
-        <h2>E. Examen Físico y Laboratorio</h2>
-        <div class="form-section">
-            <label>FC (lpm):</label><input type="number" style="width: 80px;">
-            <label>TA (mmHg):</label><input type="text" style="width: 100px;">
-        </div>
+            <h3>1. Hipoglucemiantes Orales</h3>
+            <div class="med-item"><input type="checkbox" id="metf"><label for="metf">Metformina (Biguanida)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="glib"><label for="glib">Glibenclamida (SU)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="piog"><label for="piog">Pioglitazona (TZD)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
 
-        <h3>Hallazgos Específicos</h3>
-        <div class="form-section simple-text-areas">
-            <div class="text-area-item"><label>PIEL:</label><textarea rows="1" placeholder="Normal / Acantosis / Úlceras / Dermopatía"></textarea></div>
-            <div class="text-area-item"><label>CARDIOVASCULAR:</label><textarea rows="1" placeholder="Soplos, Pulsos periféricos, Signos de IC"></textarea></div>
-            <div class="text-area-item"><label>RESPIRATORIO:</label><textarea rows="1" placeholder="Entrada de aire, Sibilancias, Rales"></textarea></div>
-            <div class="text-area-item"><label>NEUROLÓGICO:</label><textarea rows="1" placeholder="Nivel de conciencia, Déficit motor/sentitivo"></textarea></div>
-        </div>
+            <h3>2. Incretinas y DPP-4</h3>
+            <div class="med-item"><input type="checkbox" id="sita"><label for="sita">Sitagliptina / Linagliptina (iDPP4)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
 
-        <h3>Laboratorio al Inicio del Seguimiento (Variables Completas)</h3>
-        <div class="lab-table">
-            <label>HEMOGRAMA:</label><input type="text">
-            <label>GLUCEMIA:</label><input type="text">
-            <label>HBA1C:</label><input type="text">
-            <label>UREA:</label><input type="text">
-            <label>CREATININA:</label><input type="text">
-            <label>IONOGRAMA:</label><input type="text">
-            <label>HEPATOGRAMA:</label><input type="text">
-            <label>PERFIL LIPÍDICO:</label><input type="text">
-            <label>TSH:</label><input type="text">
-            <label>ERITROSEDIMENTACIÓN:</label><input type="text">
-            <label>PCR:</label><input type="text">
-            <label>FERREMIA:</label><input type="text">
-            <label>FERRITINA:</label><input type="text">
-            <label>VITAMINA D:</label><input type="text">
-            <label>VITAMINA B12:</label><input type="text">
-        </div>
+            <h3>3. Inhibidores SGLT2</h3>
+            <div class="med-item"><input type="checkbox" id="empa"><label for="empa">Empagliflozina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="dapa"><label for="dapa">Dapagliflozina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
 
-        <hr>
-        <h2>F. Planificación de Seguimiento (Alarma de Contacto)</h2>
-        <div class="form-section full-width-group">
-            <label>NUEVO CONTROL:</label>
-            <select><option>Presencial</option><option>Virtual (Zoom/Video)</option><option>Mail</option></select>
-            <label>FECHA DE NUEVO CONTROL (ALARMA):</label>
-            <input type="date" required>
+            <h3>4. Agonistas GLP-1</h3>
+            <div class="med-item"><input type="checkbox" id="sema"><label for="sema">Semaglutida (Subcutánea/Oral)</label><input type="text" placeholder="Dosis (mg/ml)" class="input-dosis"><input type="number" placeholder="Frecuencia" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="lira"><label for="lira">Liraglutida</label><input type="text" placeholder="Dosis (mg/ml)" class="input-dosis"><input type="number" placeholder="Frecuencia" class="input-frec"></div>
+
+            <h3>5. Insulinas y Análogos</h3>
+            <div class="med-item"><input type="checkbox" id="glarg"><label for="glarg">Glargina (Basal)</label><input type="text" placeholder="Dosis (UI)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="deg"><label for="deg">Degludec (Basal)</label><input type="text" placeholder="Dosis (UI)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="lispro"><label for="lispro">Lispro / Aspártica (Rápida)</label><input type="text" placeholder="Dosis (UI)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+
+            <h3>6. IECA y ARA II (Antihipertensivos Clave)</h3>
+            <div class="med-item"><input type="checkbox" id="enal"><label for="enal">Enalapril (IECA)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="ramip"><label for="ramip">Ramipril (IECA)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="losar"><label for="losar">Losartán (ARA II)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="valsar"><label for="valsar">Valsartán (ARA II)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+
+            <h3>7. Betabloqueantes y BCC</h3>
+            <div class="med-item"><input type="checkbox" id="carve"><label for="carve">Carvedilol (BetaB)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="bisop"><label for="bisop">Bisoprolol (BetaB)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="amlod"><label for="amlod">Amlodipina (BCC)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+
+            <h3>8. ARM y Diuréticos</h3>
+            <div class="med-item"><input type="checkbox" id="espiro"><label for="espiro">Espironolactona (ARM)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="eple"><label for="eple">Eplerenona (ARM)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="fineren"><label for="fineren">Finerenona (ARM)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="fur"><label for="fur">Furosemida (Diurético)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+
+            <h3>9. Dislipidemia</h3>
+            <div class="med-item"><input type="checkbox" id="atorva"><label for="atorva">Atorvastatina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="rosuva"><label for="rosuva">Rosuvastatina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="eze"><label for="eze">Ezetimibe</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="ipe"><label for="ipe">Icosapento de Etilo (IPE)</label><input type="text" placeholder="Dosis (g)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            
+            <h3>10. Antitrombóticos</h3>
+            <div class="med-item"><input type="checkbox" id="aas"><label for="aas">Aspirina (AAS)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="clopi"><label for="clopi">Clopidogrel</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="riva"><label for="riva">Rivaroxabán (DOAC)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="api"><label for="api">Apixabán (DOAC)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="warfa"><label for="warfa">Warfarina / Acenocumarol (AVK)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            
+            <h3>11. Drogas para Comorbilidades</h3>
+            <div class="med-item"><input type="checkbox" id="amio"><label for="amio">Amiodarona (Antiarritmico)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="levo"><label for="levo">Levotiroxina (Tiroides)</label><input type="text" placeholder="Dosis (mcg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="sertr"><label for="sertr">Sertralina / Escitalopram (Psiquiátrica)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="omep"><label for="omep">Omeprazol / IBP</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+            <div class="med-item"><input type="checkbox" id="otro"><label for="otro">Otra medicación (especifique):</label><input type="text" placeholder="Nombre/Dosis" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
         </div>
-        
-        <label>Indicaciones (INTERPAC):</label>
-        <textarea rows="3" placeholder="Estas indicaciones se verán en la plataforma del paciente."></textarea>
-        
-        <label>Objetivos para Próximo Control (INTERPAC):</label>
-        <textarea rows="2" placeholder="Ej: HbA1c < 7.0, Bajar 1 Kg."></textarea>
-        
-        <button type="submit" class="submit-btn">Guardar Ficha de Ingreso</button>
-    </form>
-</body>
-</html>
