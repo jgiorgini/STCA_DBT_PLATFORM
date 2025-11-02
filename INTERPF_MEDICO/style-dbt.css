@@ -1,8 +1,154 @@
-/* Nuevo contenedor para la lista vertical de medicamentos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+#ficha-ingreso {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="number"], input[type="email"], input[type="date"], input[type="tel"], select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+textarea {
+    resize: vertical;
+}
+
+/* A. Datos Identificatorios: Alineación Vertical de Contacto */
+.vertical-contact-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0; 
+    max-width: 350px; 
+    margin-bottom: 20px;
+}
+.contact-item {
+    margin-bottom: 5px;
+}
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+.full-width-group {
+    grid-template-columns: 1fr 1fr 1fr; 
+}
+
+/* B. Antecedentes/Factores */
+.form-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+.multi-line-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+.input-item {
+    flex: 1 1 250px;
+    min-width: 250px;
+}
+.input-item label {
+    margin-bottom: 5px;
+}
+.input-item textarea {
+    margin-top: 0;
+}
+.antropometricos-vertical {
+    display: flex;
+    flex-direction: column; 
+    height: auto; 
+    max-height: 250px;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.antrop-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 380px; 
+}
+.antropometricos-vertical label {
+    flex: none;
+    width: 180px; 
+    margin: 0;
+    font-size: 0.9em;
+}
+.antropometricos-vertical input {
+    flex-grow: 1;
+    margin: 0;
+}
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    row-gap: 15px; 
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+/* C. Psicosociales */
+.btn-mdcalc-inline {
+    padding: 5px 8px;
+    background-color: #e0f7fa;
+    border: 1px solid #00bcd4;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.8em;
+    text-decoration: none;
+    color: #007bff;
+    text-align: center;
+    display: inline-block;
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* D. Tratamiento Actual: Alineación Tabular */
 .medication-list-vertical {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Espacio entre categorías */
+    gap: 15px; 
     margin-bottom: 20px;
 }
 .medication-list-vertical h3 {
@@ -14,8 +160,7 @@
     padding-bottom: 5px;
 }
 .med-item {
-    /* CORRECCIÓN CLAVE: Definimos las 4 columnas de la grilla */
-    /* Checkbox (20px) | Nombre Droga (Toma el espacio restante) | Dosis (100px) | Veces/Día (80px) */
+    /* Define la grilla: Checkbox (20px) | Nombre Droga (Flexible) | Dosis (100px) | Veces/Día (80px) */
     display: grid;
     grid-template-columns: 20px 1fr 100px 80px; 
     gap: 10px;
@@ -28,7 +173,6 @@
     font-weight: normal;
     margin: 0;
     display: inline-block;
-    /* Asegura que la etiqueta no envuelva el texto de forma extraña */
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -44,7 +188,6 @@
     font-size: 0.9em;
     box-sizing: border-box;
 }
-/* Estilos para asegurar el ancho fijo de los campos de entrada */
 .input-frec {
     max-width: 80px; 
     text-align: center;
@@ -52,4 +195,42 @@
 .input-dosis {
     max-width: 100px;
 }
-/* ... otros estilos ... */
+.instruction-note {
+    font-size: 0.85em;
+    color: #6c757d;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+/* E. Examen Físico y Laboratorio */
+.simple-text-areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+.text-area-item label {
+    font-size: 1em;
+    margin-bottom: 3px;
+}
+.text-area-item textarea {
+    margin-top: 0;
+}
+.lab-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* F. Planificación */
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 20px;
+    width: 100%;
+}
