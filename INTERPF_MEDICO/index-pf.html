@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>INTERPF - Ficha de Ingreso y Seguimiento DBT2</title>
     <link rel="stylesheet" href="style-dbt.css">
-</head>
+    </head>
 <body>
     <header>
-        <h1>INTERPF - Ficha de Ingreso DBT2 (Dr. Giorgini)</h1>
+        <h1>INTERPF - Ficha de Ingreso y Seguimiento DBT2 (Dr. Giorgini)</h1>
     </header>
     <form id="ficha-ingreso">
         <h2>A. Datos Identificatorios y Logísticos</h2>
@@ -45,19 +45,20 @@
             <label>Años de Dx DBT:</label><input type="number" style="width: 100px;">
             <label>Tipo de Diabetes:</label><select><option>Tipo 2</option><option>Tipo 1</option></select>
             <label>Antecedentes CV:</label><input type="text" placeholder="IAM, ACV, IC, etc.">
+            <label>VIH:</label><select><option>No</option><option>Sí</option></select>
         </div>
 
         <h3>Parámetros Antropométricos</h3>
         <div class="antropometricos-vertical">
-            <label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;">
-            <label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;">
-            <label>BMI:</label><input type="text" disabled placeholder="Calculado" id="bmi-auto">
-            <label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;">
-            <label>Relación Cintura/Altura:</label><input type="text" disabled placeholder="Calculado" id="rca-auto">
+            <div class="antrop-item"><label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;"></div>
+            <div class="antrop-item"><label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;"></div>
+            <div class="antrop-item"><label>BMI:</label><input type="text" disabled placeholder="Calculado" id="bmi-auto"></div>
+            <div class="antrop-item"><label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;"></div>
+            <div class="antrop-item"><label>Relación Cintura/Altura:</label><input type="text" disabled placeholder="Calculado" id="rca-auto"></div>
         </div>
 
         <h3>Factores Modificables y Estilo de Vida</h3>
-        <div class="checkbox-group">
+        <div class="checkbox-group large-gap">
             <label>Tabaquismo:</label><select><option>Actual</option><option>Ex-fumador</option><option>Nunca</option></select>
             <label>Consumo Alcohol:</label><select><option>Abstinente</option><option>Social</option><option>Riesgo</option></select>
             <label>Dieta - Frutas y Verduras Diarias:</label> <input type="checkbox">
@@ -84,8 +85,8 @@
         <div class="form-section">
             <label>Horas de Sueño:</label><input type="number" style="width: 100px;">
             <label>Riesgo SAOS (STOP BANG):</label> 
-            <button type="button" class="btn-small" onclick="mostrarStopBang()">CÁLCULO (Puntaje)</button>
-            <input type="text" disabled placeholder="Automático" style="width: 100px;">
+            <a href="https://www.mdcalc.com/calc/3992/stop-bang-score-obstructive-sleep-apnea" target="_blank" class="btn-mdcalc">CÁLCULO EXTERNO</a>
+            <input type="text" placeholder="Puntaje" style="width: 80px;">
         </div>
 
         <h3>Cribado de Depresión (PHQ-2)</h3>
@@ -94,35 +95,68 @@
              <select id="phq2-p1"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
              <label>P2: Se ha sentido decaído/a, deprimido/a (0-3):</label>
              <select id="phq2-p2"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-             <label>Puntuación PHQ-2:</label><input type="text" disabled placeholder="Automático" id="phq2-auto">
+             <label>Resultado PHQ-2:</label>
+             <a href="https://aidsetc.org/sites/default/files/resources_files/PHQ-2_Spanish.pdf" target="_blank" class="btn-mdcalc">GUÍA</a>
+             <input type="text" disabled placeholder="Puntuación (0-6)" id="phq2-auto" style="width: 80px;">
         </div>
 
         <hr>
-        <h2>D. Tratamiento Actual (Completo)</h2>
+        <h2>D. Tratamiento Actual (Checkboxes y Texto)</h2>
+        <p class="instruction-note">Marque las drogas que usa el paciente y complete dosis/horario en el campo de texto.</p>
+
         <div class="medication-grid">
-            <label class="grid-header">Categoría</label>
-            <label class="grid-header">Droga / Opciones</label>
-            <label class="grid-header">Dosis y Horario (Texto Libre)</label>
+            <label class="grid-header-cat">Categoría</label>
+            <label class="grid-header-cat">Drogas Comunes</label>
+            <label class="grid-header-cat">Dosis y Horario</label>
+
+            <label>HIPOGLUCEMIANTES:</label>
+            <div class="checkbox-list">
+                <input type="checkbox" id="metf"><label for="metf">Metformina</label>
+                <input type="checkbox" id="sitag"><label for="sitag">Sitagliptina/Linagliptina (iDPP4)</label>
+                <input type="checkbox" id="gli"><label for="gli">Glibenclamida (SU)</label>
+                <input type="checkbox" id="empa"><label for="empa">Empagliflozina (iSGLT2)</label>
+                <input type="checkbox" id="sema"><label for="sema">Semaglutida (aGLP1)</label>
+            </div>
+            <input type="text" placeholder="Dosis (mg) y Horario">
+
+            <label>INSULINAS / ANÁLOGOS:</label>
+            <div class="checkbox-list">
+                <input type="checkbox" id="basal"><label for="basal">Basal (Detemir/Glargina)</label>
+                <input type="checkbox" id="rapida"><label for="rapida">Rápida (Corrección)</label>
+            </div>
+            <input type="text" placeholder="Dosis (UI) y Regimen de Corrección">
 
             <label>ANTIHIPERTENSIVOS:</label>
-            <select><option>Enalapril</option><option>Losartán</option></select>
-            <input type="text" placeholder="Dosis (mg) y Horario (Ej: 10mg Desayuno)">
-            
+            <div class="checkbox-list">
+                <input type="checkbox" id="enal"><label for="enal">Enalapril (IECA)</label>
+                <input type="checkbox" id="losar"><label for="losar">Losartán (ARA II)</label>
+                <input type="checkbox" id="amlod"><label for="amlod">Amlodipina (BCC)</label>
+                <input type="checkbox" id="hidro"><label for="hidro">Hidroclorotiazida (Diurético)</label>
+            </div>
+            <input type="text" placeholder="Dosis (mg) y Horario">
+
             <label>HIPOLIPEMIANTES:</label>
-            <select><option>Atorvastatina</option><option>Ezetimibe</option></select>
+            <div class="checkbox-list">
+                <input type="checkbox" id="atorva"><label for="atorva">Atorvastatina</label>
+                <input type="checkbox" id="eze"><label for="eze">Ezetimibe</label>
+                <input type="checkbox" id="ipe"><label for="ipe">Icosapento de Etilo</label>
+            </div>
             <input type="text" placeholder="Dosis (mg) y Horario">
-
-            <label>HIPOGLUCEMIANTES ORALES:</label>
-            <select><option>Metformina</option><option>Sitagliptina (iDPP4)</option></select>
-            <input type="text" placeholder="Dosis (mg) y Horario">
-
-            <label>INSULINAS Y ANÁLOGOS:</label>
-            <select><option>Detemir</option><option>Glargina</option><option>Insulina Rápida (Corrección)</option></select>
-            <input type="text" placeholder="Dosis Diaria y/o Corrección (Sí/No)">
             
-            <label>MEDICACIÓN PSIQUIÁTRICA:</label>
-            <input type="text" placeholder="Ej: Sertralina, Alprazolam">
-            <input type="text" placeholder="Dosis y Horario">
+            <label>ANTIARRÍTMICOS:</label>
+            <div class="checkbox-list">
+                <input type="checkbox" id="amiod"><label for="amiod">Amiodarona</label>
+                <input type="checkbox" id="flec"><label for="flec">Flecainida</label>
+            </div>
+            <input type="text" placeholder="Dosis (mg) y Horario">
+
+            <label>PSIQUIÁTRICAS:</label>
+            <div class="checkbox-list">
+                <input type="checkbox" id="sert"><label for="sert">Sertralina</label>
+                <input type="checkbox" id="clona"><label for="clona">Clonazepam</label>
+            </div>
+            <input type="text" placeholder="Dosis (mg) y Horario">
+
         </div>
         
         <hr>
@@ -176,25 +210,5 @@
         
         <button type="submit" class="submit-btn">Guardar Ficha de Ingreso</button>
     </form>
-    
-    <div id="stop-bang-modal" class="modal">
-        <div class="modal-content">
-            <h4>Cuestionario STOP BANG</h4>
-            <p>Pregunta 1 (S): ¿Sueña fuerte? <input type="checkbox"></p>
-            <p>Pregunta 2 (T): ¿Se siente cansado/a durante el día? <input type="checkbox"></p>
-            <button onclick="cerrarModal()">Calcular y Cerrar</button>
-        </div>
-    </div>
-    
-    <script>
-        // Funciones dummy de JS que el desarrollador debe implementar
-        function mostrarStopBang() {
-            document.getElementById('stop-bang-modal').style.display = 'block';
-        }
-        function cerrarModal() {
-            // Aquí iría el código para calcular el puntaje y cerrar
-            document.getElementById('stop-bang-modal').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
