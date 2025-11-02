@@ -30,15 +30,23 @@
             <label>Sexo:</label>
             <select><option>Femenino</option><option>Masculino</option><option>Otro</option></select>
             <label>Médico Tratante:</label><input type="text" value="Dr. Julio Giorgini">
-            <label>Médico que completa la Ficha:</label><input type="text">
         </div>
         
-        <div class="form-group full-width-group">
-            <label>Dirección/Ciudad/Pueblo, etc:</label><input type="text">
-            <label>Teléfono:</label><input type="tel">
-            <label>Mail:</label><input type="email">
+        <div class="vertical-contact-group">
+            <div class="contact-item">
+                <label>Dirección/Ciudad/Pueblo, etc:</label>
+                <input type="text" style="width: 100%;">
+            </div>
+            <div class="contact-item">
+                <label>Teléfono:</label>
+                <input type="tel" style="width: 100%;">
+            </div>
+            <div class="contact-item">
+                <label>Mail:</label>
+                <input type="email" style="width: 100%;">
+            </div>
         </div>
-
+        
         <hr>
         <h2>B. Antecedentes y Factores de Riesgo Modificables</h2>
         <div class="form-section">
@@ -50,11 +58,23 @@
 
         <h3>Parámetros Antropométricos</h3>
         <div class="antropometricos-vertical">
-            <div class="antrop-item"><label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;"></div>
-            <div class="antrop-item"><label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;"></div>
-            <div class="antrop-item"><label>BMI:</label><input type="text" disabled placeholder="Calculado" id="bmi-auto"></div>
-            <div class="antrop-item"><label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;"></div>
-            <div class="antrop-item"><label>Relación Cintura/Altura:</label><input type="text" disabled placeholder="Calculado" id="rca-auto"></div>
+            <div class="antrop-item">
+                <label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;">
+            </div>
+            <div class="antrop-item">
+                <label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;">
+            </div>
+            <div class="antrop-item">
+                <label>BMI:</label>
+                <a href="https://www.mdcalc.com/calc/29/body-mass-index-bmi-body-surface-area-bsa" target="_blank" class="btn-mdcalc-inline">CALCULAR</a>
+                <input type="text" id="bmi-manual" style="width: 80px;">
+            </div>
+            <div class="antrop-item">
+                <label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;">
+            </div>
+            <div class="antrop-item">
+                <label>Relación Cintura/Altura:</label><input type="text" placeholder="Manual" style="width: 80px;">
+            </div>
         </div>
 
         <h3>Factores Modificables y Estilo de Vida</h3>
@@ -67,10 +87,16 @@
             <label>Ejercicio Aeróbico (150' min/sem):</label> <input type="checkbox">
         </div>
         
-        <div class="form-section">
-            <label>Antecedentes Quirúrgicos:</label><textarea rows="1"></textarea>
-            <label>Internaciones (Causas):</label><textarea rows="1"></textarea>
-            <label>Patología Respiratoria:</label><textarea rows="1"></textarea>
+        <div class="form-section multi-line-inputs">
+            <div class="input-item">
+                <label>Antecedentes Quirúrgicos:</label><textarea rows="1"></textarea>
+            </div>
+            <div class="input-item">
+                <label>Internaciones (Causas):</label><textarea rows="1"></textarea>
+            </div>
+            <div class="input-item">
+                <label>Patología Respiratoria:</label><textarea rows="1"></textarea>
+            </div>
         </div>
         
         <hr>
@@ -83,21 +109,17 @@
         </div>
         
         <div class="form-section">
-            <label>Horas de Sueño:</label><input type="number" style="width: 100px;">
+            <label>Horas de Sueño:</label><input type="number" style="width: 80px;">
             <label>Riesgo SAOS (STOP BANG):</label> 
-            <a href="https://www.mdcalc.com/calc/3992/stop-bang-score-obstructive-sleep-apnea" target="_blank" class="btn-mdcalc">CÁLCULO EXTERNO</a>
+            <a href="https://www.mdcalc.com/calc/3992/stop-bang-score-obstructive-sleep-apnea" target="_blank" class="btn-mdcalc-inline">CALCULAR</a>
             <input type="text" placeholder="Puntaje" style="width: 80px;">
         </div>
 
         <h3>Cribado de Depresión (PHQ-2)</h3>
         <div class="form-section phq-section">
-             <label>P1: Poco interés o placer en hacer cosas (0-3):</label>
-             <select id="phq2-p1"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-             <label>P2: Se ha sentido decaído/a, deprimido/a (0-3):</label>
-             <select id="phq2-p2"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-             <label>Resultado PHQ-2:</label>
-             <a href="https://aidsetc.org/sites/default/files/resources_files/PHQ-2_Spanish.pdf" target="_blank" class="btn-mdcalc">GUÍA</a>
-             <input type="text" disabled placeholder="Puntuación (0-6)" id="phq2-auto" style="width: 80px;">
+             <label>Puntuación PHQ-2:</label>
+             <a href="https://aidsetc.org/sites/default/files/resources_files/PHQ-2_Spanish.pdf" target="_blank" class="btn-mdcalc-inline">VER GUÍA</a>
+             <input type="text" placeholder="Puntaje (0-6)" style="width: 80px;">
         </div>
 
         <hr>
@@ -112,52 +134,13 @@
             <label>HIPOGLUCEMIANTES:</label>
             <div class="checkbox-list">
                 <input type="checkbox" id="metf"><label for="metf">Metformina</label>
-                <input type="checkbox" id="sitag"><label for="sitag">Sitagliptina/Linagliptina (iDPP4)</label>
-                <input type="checkbox" id="gli"><label for="gli">Glibenclamida (SU)</label>
+                <input type="checkbox" id="sitag"><label for="sitag">Sitagliptina (iDPP4)</label>
                 <input type="checkbox" id="empa"><label for="empa">Empagliflozina (iSGLT2)</label>
                 <input type="checkbox" id="sema"><label for="sema">Semaglutida (aGLP1)</label>
             </div>
             <input type="text" placeholder="Dosis (mg) y Horario">
-
-            <label>INSULINAS / ANÁLOGOS:</label>
-            <div class="checkbox-list">
-                <input type="checkbox" id="basal"><label for="basal">Basal (Detemir/Glargina)</label>
-                <input type="checkbox" id="rapida"><label for="rapida">Rápida (Corrección)</label>
-            </div>
-            <input type="text" placeholder="Dosis (UI) y Regimen de Corrección">
-
-            <label>ANTIHIPERTENSIVOS:</label>
-            <div class="checkbox-list">
-                <input type="checkbox" id="enal"><label for="enal">Enalapril (IECA)</label>
-                <input type="checkbox" id="losar"><label for="losar">Losartán (ARA II)</label>
-                <input type="checkbox" id="amlod"><label for="amlod">Amlodipina (BCC)</label>
-                <input type="checkbox" id="hidro"><label for="hidro">Hidroclorotiazida (Diurético)</label>
-            </div>
-            <input type="text" placeholder="Dosis (mg) y Horario">
-
-            <label>HIPOLIPEMIANTES:</label>
-            <div class="checkbox-list">
-                <input type="checkbox" id="atorva"><label for="atorva">Atorvastatina</label>
-                <input type="checkbox" id="eze"><label for="eze">Ezetimibe</label>
-                <input type="checkbox" id="ipe"><label for="ipe">Icosapento de Etilo</label>
-            </div>
-            <input type="text" placeholder="Dosis (mg) y Horario">
             
-            <label>ANTIARRÍTMICOS:</label>
-            <div class="checkbox-list">
-                <input type="checkbox" id="amiod"><label for="amiod">Amiodarona</label>
-                <input type="checkbox" id="flec"><label for="flec">Flecainida</label>
             </div>
-            <input type="text" placeholder="Dosis (mg) y Horario">
-
-            <label>PSIQUIÁTRICAS:</label>
-            <div class="checkbox-list">
-                <input type="checkbox" id="sert"><label for="sert">Sertralina</label>
-                <input type="checkbox" id="clona"><label for="clona">Clonazepam</label>
-            </div>
-            <input type="text" placeholder="Dosis (mg) y Horario">
-
-        </div>
         
         <hr>
         <h2>E. Examen Físico y Laboratorio</h2>
@@ -167,11 +150,11 @@
         </div>
 
         <h3>Hallazgos Específicos</h3>
-        <div class="form-section">
-            <label>PIEL:</label><textarea rows="1" placeholder="Normal / Acantosis / Úlceras / Dermopatía"></textarea>
-            <label>CARDIOVASCULAR:</label><textarea rows="1" placeholder="Soplos, Pulsos periféricos, Signos de IC"></textarea>
-            <label>RESPIRATORIO:</label><textarea rows="1" placeholder="Entrada de aire, Sibilancias, Rales"></textarea>
-            <label>NEUROLÓGICO:</label><textarea rows="1" placeholder="Nivel de conciencia, Déficit motor/sentitivo"></textarea>
+        <div class="form-section simple-text-areas">
+            <div class="text-area-item"><label>PIEL:</label><textarea rows="1" placeholder="Normal / Acantosis / Úlceras / Dermopatía"></textarea></div>
+            <div class="text-area-item"><label>CARDIOVASCULAR:</label><textarea rows="1" placeholder="Soplos, Pulsos periféricos, Signos de IC"></textarea></div>
+            <div class="text-area-item"><label>RESPIRATORIO:</label><textarea rows="1" placeholder="Entrada de aire, Sibilancias, Rales"></textarea></div>
+            <div class="text-area-item"><label>NEUROLÓGICO:</label><textarea rows="1" placeholder="Nivel de conciencia, Déficit motor/sentitivo"></textarea></div>
         </div>
 
         <h3>Laboratorio al Inicio del Seguimiento (Variables Completas)</h3>
