@@ -1,242 +1,314 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>INTERPF - Ficha de Ingreso y Seguimiento DBT2</title>
-    <link rel="stylesheet" href="style-dbt.css">
-    </head>
+  <meta charset="UTF-8" />
+  <title>INTERPF - Ficha de Ingreso y Seguimiento DBT2</title>
+  <link rel="stylesheet" href="style-dbt.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
 <body>
-    <header>
-        <h1>INTERPF - Ficha de Ingreso y Seguimiento DBT2 (Dr. Giorgini)</h1>
-    </header>
-    <form id="ficha-ingreso">
-        <h2>A. Datos Identificatorios y Logísticos</h2>
-        <div class="form-group">
-            <label>Fecha de Inicio de Seguimiento:</label>
-            <input type="date" required>
-            <label>Lugar:</label>
-            <input type="text" value="Hospital Alemán" required>
-            <label>Nombre y Apellido:</label>
-            <input type="text" required>
-            <label>Documento de Identidad:</label>
-            <input type="text" required>
+<header class="app-header no-print">
+  <h1>INTERPF · Ficha de Ingreso y Seguimiento DBT2 (Dr. Giorgini)</h1>
+  <div class="header-actions">
+    <button type="button" id="btn-save">Guardar</button>
+    <button type="button" id="btn-print">Imprimir / PDF</button>
+  </div>
+</header>
+
+<main class="container">
+  <!-- KPIs / Semáforos -->
+  <section id="kpis" class="card no-print">
+    <h2>Semáforos clínicos</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span>HbA1c</span><strong id="kpi-a1c">—</strong><em id="kpi-a1c-flag" class="flag gray">—</em></div>
+      <div class="kpi"><span>LDL (mg/dL)</span><strong id="kpi-ldl">—</strong><em id="kpi-ldl-flag" class="flag gray">—</em></div>
+      <div class="kpi"><span>PA (mmHg)</span><strong id="kpi-ta">—</strong><em id="kpi-ta-flag" class="flag gray">—</em></div>
+      <div class="kpi"><span>BMI (kg/m²)</span><strong id="kpi-bmi">—</strong><em id="kpi-bmi-flag" class="flag gray">—</em></div>
+    </div>
+    <p class="muted">Los umbrales son editables en el bloque de configuración del script.</p>
+  </section>
+
+  <form id="ficha-ingreso" class="card">
+    <h2>A. Datos identificatorios y logísticos</h2>
+    <div class="grid2">
+      <label>Fecha de inicio<input id="ini" type="date" required></label>
+      <label>Lugar<input id="lugar" type="text" value="Hospital Alemán" required></label>
+
+      <label>Nombre y Apellido<input id="nombre" type="text" required></label>
+      <label>Documento de identidad<input id="dni" type="text" required></label>
+
+      <label>Fecha de nacimiento<input id="fnac" type="date"></label>
+      <label>Edad (auto)<input id="edad-auto" type="text" placeholder="Automático" readonly></label>
+
+      <label>Sexo
+        <select id="sexo">
+          <option value=""></option><option>Femenino</option><option>Masculino</option><option>Otro</option>
+        </select>
+      </label>
+      <label>Médico tratante<input id="med-trat" type="text" value="Dr. Julio Giorgini"></label>
+    </div>
+
+    <div class="grid3">
+      <label>Dirección / Ciudad<input id="direccion" type="text"></label>
+      <label>Teléfono<input id="tel" type="tel"></label>
+      <label>Mail<input id="mail" type="email"></label>
+    </div>
+
+    <hr>
+    <h2>B. Antecedentes y factores de riesgo modificables</h2>
+    <div class="grid3">
+      <label>Años de Dx DBT<input id="anios-dbt" type="number" min="0" step="1"></label>
+      <label>Tipo de diabetes
+        <select id="tipo-dbt"><option>Tipo 2</option><option>Tipo 1</option></select>
+      </label>
+      <label>Antecedentes CV<input id="ant-cv" type="text" placeholder="IAM, ACV, IC, etc."></label>
+      <label>VIH
+        <select id="vih"><option>No</option><option>Sí</option></select>
+      </label>
+    </div>
+
+    <h3>Parámetros antropométricos</h3>
+    <div class="grid4">
+      <label>Altura (m)<input id="altura" type="number" step="0.01"></label>
+      <label>Peso (kg)<input id="peso" type="number" step="0.1"></label>
+      <label>BMI (auto)
+        <div class="inline">
+          <input id="bmi" type="text" readonly>
+          <a class="link" href="https://www.mdcalc.com/calc/29/body-mass-index-bmi-body-surface-area-bsa" target="_blank">MDCalc</a>
         </div>
+      </label>
+      <label>Perím. cintura (cm)<input id="cintura" type="number" step="0.1"></label>
+      <label>Rel. cintura/altura (auto)<input id="rel-ca" type="text" readonly></label>
+    </div>
 
-        <div class="form-group">
-            <label>Fecha de Nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-            <label>Edad:</label>
-            <input type="text" disabled placeholder="Automático" id="edad-auto">
-            <label>Sexo:</label>
-            <select><option>Femenino</option><option>Masculino</option><option>Otro</option></select>
-            <label>Médico Tratante:</label><input type="text" value="Dr. Julio Giorgini">
+    <h3>Estilo de vida</h3>
+    <div class="grid3">
+      <label>Tabaquismo
+        <select id="tabaco"><option>Actual</option><option>Ex-fumador</option><option>Nunca</option></select>
+      </label>
+      <label>Alcohol
+        <select id="alcohol"><option>Abstinente</option><option>Social</option><option>Riesgo</option></select>
+      </label>
+      <label class="chk"><input id="fv" type="checkbox"> Dieta: frutas y verduras diarias</label>
+      <label class="chk"><input id="azucares" type="checkbox"> Dieta: azúcares diarios</label>
+      <label class="chk"><input id="carb" type="checkbox"> Conteo de carbohidratos correcto</label>
+      <label class="chk"><input id="aerobico" type="checkbox"> Ejercicio aeróbico ≥150 min/sem</label>
+    </div>
+
+    <div class="grid3">
+      <label>Antecedentes quirúrgicos<textarea id="qx" rows="1"></textarea></label>
+      <label>Internaciones (causas)<textarea id="intern" rows="1"></textarea></label>
+      <label>Patología respiratoria<textarea id="resp" rows="1"></textarea></label>
+    </div>
+
+    <hr>
+    <h2>C. Psicosocial y sueño</h2>
+    <div class="grid3">
+      <label>Vive solo / con familia<input id="conviv" type="text" placeholder="Con quién vive si aplica"></label>
+      <label>Nivel de escolaridad
+        <select id="esco"><option>Primario</option><option>Secundario</option><option>Terciario/Univ.</option></select>
+      </label>
+      <label class="chk"><input id="vuln" type="checkbox"> Vivienda en zona vulnerable</label>
+      <label class="chk"><input id="planes" type="checkbox"> Recibe planes sociales</label>
+    </div>
+
+    <div class="grid3">
+      <label>Horas de sueño<input id="sueno" type="number" step="0.5"></label>
+      <label>STOP-BANG
+        <div class="inline">
+          <input id="stopbang" type="text" placeholder="Puntaje (0–8)">
+          <a class="link" href="https://www.mdcalc.com/calc/3992/stop-bang-score-obstructive-sleep-apnea" target="_blank">MDCalc</a>
         </div>
-        
-        <div class="vertical-contact-group">
-            <div class="contact-item">
-                <label>Dirección/Ciudad/Pueblo, etc:</label>
-                <input type="text" style="width: 100%;">
-            </div>
-            <div class="contact-item">
-                <label>Teléfono:</label>
-                <input type="tel" style="width: 100%;">
-            </div>
-            <div class="contact-item">
-                <label>Mail:</label>
-                <input type="email" style="width: 100%;">
-            </div>
+      </label>
+      <label>PHQ-2
+        <div class="inline">
+          <input id="phq2" type="text" placeholder="0–6">
+          <a className="link" href="https://aidsetc.org/sites/default/files/resources_files/PHQ-2_Spanish.pdf" target="_blank">Guía</a>
         </div>
-        
-        <hr>
-        <h2>B. Antecedentes y Factores de Riesgo Modificables</h2>
-        <div class="form-section">
-            <label>Años de Dx DBT:</label><input type="number" style="width: 100px;">
-            <label>Tipo de Diabetes:</label><select><option>Tipo 2</option><option>Tipo 1</option></select>
-            <label>Antecedentes CV:</label><input type="text" placeholder="IAM, ACV, IC, etc.">
-            <label>VIH:</label><select><option>No</option><option>Sí</option></select>
-        </div>
+      </label>
+    </div>
 
-        <h3>Parámetros Antropométricos</h3>
-        <div class="antropometricos-vertical">
-            <div class="antrop-item">
-                <label>Altura (m):</label><input type="number" step="0.01" id="altura" style="width: 100px;">
-            </div>
-            <div class="antrop-item">
-                <label>Peso (Kg):</label><input type="number" step="0.1" id="peso" style="width: 100px;">
-            </div>
-            <div class="antrop-item">
-                <label>BMI:</label>
-                <a href="https://www.mdcalc.com/calc/29/body-mass-index-bmi-body-surface-area-bsa" target="_blank" class="btn-mdcalc-inline">CALCULAR</a>
-                <input type="text" id="bmi-manual" style="width: 80px;">
-            </div>
-            <div class="antrop-item">
-                <label>Perím. Cintura (cm):</label><input type="number" style="width: 100px;">
-            </div>
-            <div class="antrop-item">
-                <label>Relación Cintura/Altura:</label><input type="text" placeholder="Manual" style="width: 80px;">
-            </div>
-        </div>
+    <hr>
+    <h2>D. Tratamiento actual (resumen)</h2>
+    <p class="muted">Sigue siendo válido tu listado completo. Aquí dejamos un resumen libre; si deseas, puedo agregarte selectores rápidos tipo “presets”.</p>
+    <textarea id="tratamiento" rows="3" placeholder="Ej.: Metformina 850 mg c/12h, Dapa 10 mg/d, Atorva 40 mg/noche…"></textarea>
 
-        <h3>Factores Modificables y Estilo de Vida</h3>
-        <div class="checkbox-group large-gap">
-            <label>Tabaquismo:</label><select><option>Actual</option><option>Ex-fumador</option><option>Nunca</option></select>
-            <label>Consumo Alcohol:</label><select><option>Abstinente</option><option>Social</option><option>Riesgo</option></select>
-            <label>Dieta - Frutas y Verduras Diarias:</label> <input type="checkbox">
-            <label>Dieta - Azúcares Diarios:</label> <input type="checkbox">
-            <label>Hace correctamente Conteo de Carbohidratos:</label> <input type="checkbox">
-            <label>Ejercicio Aeróbico (150' min/sem):</label> <input type="checkbox">
-        </div>
-        
-        <div class="form-section multi-line-inputs">
-            <div class="input-item">
-                <label>Antecedentes Quirúrgicos:</label><textarea rows="1"></textarea>
-            </div>
-            <div class="input-item">
-                <label>Internaciones (Causas):</label><textarea rows="1"></textarea>
-            </div>
-            <div class="input-item">
-                <label>Patología Respiratoria:</label><textarea rows="1"></textarea>
-            </div>
-        </div>
-        
-        <hr>
-        <h2>C. Factores Psicosociales y Sueño</h2>
-        <div class="form-section">
-            <label>Vive solo o con familia:</label><input type="text" placeholder="Con quién vive si aplica">
-            <label>Nivel de Escolaridad:</label><select><option>Primario</option><option>Secundario</option></select>
-            <label>Vivienda en Zona Vulnerable:</label> <input type="checkbox">
-            <label>Recibe Planes Sociales:</label> <input type="checkbox">
-        </div>
-        
-        <div class="form-section">
-            <label>Horas de Sueño:</label><input type="number" style="width: 80px;">
-            <label>Riesgo SAOS (STOP BANG):</label> 
-            <a href="https://www.mdcalc.com/calc/3992/stop-bang-score-obstructive-sleep-apnea" target="_blank" class="btn-mdcalc-inline">CALCULAR</a>
-            <input type="text" placeholder="Puntaje" style="width: 80px;">
-        </div>
+    <hr>
+    <h2>E. Examen físico y laboratorio</h2>
+    <div class="grid3">
+      <label>FC (lpm)<input id="fc" type="number" min="0"></label>
+      <label>TA (mmHg: 120/70)<input id="ta" type="text" placeholder="Ej.: 130/80"></label>
+    </div>
 
-        <h3>Cribado de Depresión (PHQ-2)</h3>
-        <div class="form-section phq-section">
-             <label>Puntuación PHQ-2:</label>
-             <a href="https://aidsetc.org/sites/default/files/resources_files/PHQ-2_Spanish.pdf" target="_blank" class="btn-mdcalc-inline">VER GUÍA</a>
-             <input type="text" placeholder="Puntaje (0-6)" style="width: 80px;">
-        </div>
+    <h3>Laboratorio</h3>
+    <div class="grid3">
+      <label>HbA1c %<input id="a1c" type="number" step="0.1"></label>
+      <label>LDL mg/dL<input id="ldl" type="number" step="1"></label>
+      <label>Glucemia mg/dL<input id="gluc" type="number" step="1"></label>
+      <label>Urea<input id="urea" type="text"></label>
+      <label>Creatinina<input id="creat" type="text"></label>
+      <label>TSH<input id="tsh" type="text"></label>
+      <label>PCR<input id="pcr" type="text"></label>
+      <label>Ferritina<input id="ferritina" type="text"></label>
+      <label>Vitamina D<input id="vitd" type="text"></label>
+    </div>
 
-        <hr>
-        <h2>D. Tratamiento Actual (Listado Detallado)</h2>
-        <p class="instruction-note">Marque las drogas que usa el paciente. Complete la Dosis y el número de veces que la toma por día.</p>
+    <hr>
+    <h2>F. Plan de seguimiento</h2>
+    <div class="grid3">
+      <label>Próximo control
+        <select id="tipo-ctrl"><option>Presencial</option><option>Virtual (Zoom/Video)</option><option>Mail</option></select>
+      </label>
+      <label>Fecha de control (alarma)<input id="prox" type="date" required></label>
+      <label>Estado<input id="estado" type="text" readonly></label>
+    </div>
 
-        <div class="medication-list-vertical">
-            
-            <h3>1. Hipoglucemiantes Orales</h3>
-            <div class="med-item"><input type="checkbox" id="metf"><label for="metf">Metformina (Biguanida)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="glib"><label for="glib">Glibenclamida (SU)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="piog"><label for="piog">Pioglitazona (TZD)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+    <label>Indicaciones (INTERPAC)<textarea id="indic" rows="3" placeholder="Estas indicaciones se verán en la plataforma del paciente."></textarea></label>
+    <label>Objetivos para el próximo control<textarea id="objet" rows="2" placeholder="Ej.: HbA1c < 7.0, bajar 1 kg…"></textarea></label>
 
-            <h3>2. Incretinas y DPP-4</h3>
-            <div class="med-item"><input type="checkbox" id="sita"><label for="sita">Sitagliptina / Linagliptina (iDPP4)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+    <div class="actions">
+      <button type="submit" class="primary">Guardar ficha</button>
+      <button type="button" id="btn-clear">Limpiar</button>
+    </div>
+  </form>
+</main>
 
-            <h3>3. Inhibidores SGLT2</h3>
-            <div class="med-item"><input type="checkbox" id="empa"><label for="empa">Empagliflozina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="dapa"><label for="dapa">Dapagliflozina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
+<footer class="print-footer only-print">
+  <p>INTERPF – Seguimiento DBT2 · Dr. Julio C. Giorgini</p>
+</footer>
 
-            <h3>4. Agonistas GLP-1</h3>
-            <div class="med-item"><input type="checkbox" id="sema"><label for="sema">Semaglutida (Subcutánea/Oral)</label><input type="text" placeholder="Dosis (mg/ml)" class="input-dosis"><input type="number" placeholder="Frecuencia" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="lira"><label for="lira">Liraglutida</label><input type="text" placeholder="Dosis (mg/ml)" class="input-dosis"><input type="number" placeholder="Frecuencia" class="input-frec"></div>
+<script>
+/* ===== CONFIGURACIÓN DE UMBRALES (editar si querés) ===== */
+const UMBRALES = {
+  a1c_max: 7.0,
+  ldl_max: 70,
+  tas_max: 130,
+  tad_max: 80,
+  bmi_min: 18.5,
+  bmi_max: 25
+};
+/* ======================================================== */
 
-            <h3>5. Insulinas y Análogos</h3>
-            <div class="med-item"><input type="checkbox" id="glarg"><label for="glarg">Glargina (Basal)</label><input type="text" placeholder="Dosis (UI)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="deg"><label for="deg">Degludec (Basal)</label><input type="text" placeholder="Dosis (UI)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="lispro"><label for="lispro">Lispro / Aspártica (Rápida)</label><input type="text" placeholder="Dosis (UI)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+const $ = (id) => document.getElementById(id);
+const form = $('ficha-ingreso');
 
-            <h3>6. IECA y ARA II (Antihipertensivos Clave)</h3>
-            <div class="med-item"><input type="checkbox" id="enal"><label for="enal">Enalapril (IECA)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="ramip"><label for="ramip">Ramipril (IECA)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="losar"><label for="losar">Losartán (ARA II)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="valsar"><label for="valsar">Valsartán (ARA II)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+/* Cálculo edad */
+$('fnac').addEventListener('change', () => {
+  const v = $('fnac').value;
+  if (!v) return $('edad-auto').value = '';
+  const d = new Date(v), t = new Date();
+  let edad = t.getFullYear() - d.getFullYear();
+  const m = t.getMonth() - d.getMonth();
+  if (m < 0 || (m === 0 && t.getDate() < d.getDate())) edad--;
+  $('edad-auto').value = isFinite(edad) ? edad : '';
+});
 
-            <h3>7. Betabloqueantes y BCC</h3>
-            <div class="med-item"><input type="checkbox" id="carve"><label for="carve">Carvedilol (BetaB)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="bisop"><label for="bisop">Bisoprolol (BetaB)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="amlod"><label for="amlod">Amlodipina (BCC)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+/* BMI y Cintura/Altura */
+['altura','peso','cintura'].forEach(id => $(id).addEventListener('input', calcBody));
+function calcBody(){
+  const h = parseFloat($('altura').value || '0');
+  const w = parseFloat($('peso').value || '0');
+  const c = parseFloat($('cintura').value || '0');
+  const bmi = (h>0 && w>0) ? (w/(h*h)) : NaN;
+  $('bmi').value = isNaN(bmi) ? '' : (Math.round(bmi*10)/10);
+  $('rel-ca').value = (h>0 && c>0) ? (Math.round((c/(h*100))*10)/10) : '';
+  updateKPI(); // también actualiza semáforos
+}
 
-            <h3>8. ARM y Diuréticos</h3>
-            <div class="med-item"><input type="checkbox" id="espiro"><label for="espiro">Espironolactona (ARM)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="eple"><label for="eple">Eplerenona (ARM)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="fineren"><label for="fineren">Finerenona (ARM)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="fur"><label for="fur">Furosemida (Diurético)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
+/* TA parse y estado */
+$('ta').addEventListener('input', updateKPI);
+['a1c','ldl'].forEach(id => $(id).addEventListener('input', updateKPI));
 
-            <h3>9. Dislipidemia</h3>
-            <div class="med-item"><input type="checkbox" id="atorva"><label for="atorva">Atorvastatina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="rosuva"><label for="rosuva">Rosuvastatina</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="eze"><label for="eze">Ezetimibe</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="ipe"><label for="ipe">Icosapento de Etilo (IPE)</label><input type="text" placeholder="Dosis (g)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            
-            <h3>10. Antitrombóticos</h3>
-            <div class="med-item"><input type="checkbox" id="aas"><label for="aas">Aspirina (AAS)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="clopi"><label for="clopi">Clopidogrel</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="riva"><label for="riva">Rivaroxabán (DOAC)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="api"><label for="api">Apixabán (DOAC)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="warfa"><label for="warfa">Warfarina / Acenocumarol (AVK)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            
-            <h3>11. Drogas para Comorbilidades</h3>
-            <div class="med-item"><input type="checkbox" id="amio"><label for="amio">Amiodarona (Antiarritmico)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="levo"><label for="levo">Levotiroxina (Tiroides)</label><input type="text" placeholder="Dosis (mcg)" class="input-dosis"><input type="number" placeholder="Veces/día" value="1" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="sertr"><label for="sertr">Sertralina / Escitalopram (Psiquiátrica)</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="omep"><label for="omep">Omeprazol / IBP</label><input type="text" placeholder="Dosis (mg)" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-            <div class="med-item"><input type="checkbox" id="otro"><label for="otro">Otra medicación (especifique):</label><input type="text" placeholder="Nombre/Dosis" class="input-dosis"><input type="number" placeholder="Veces/día" class="input-frec"></div>
-        </div>
+function updateKPI(){
+  const a1c = parseFloat($('a1c').value);
+  const ldl = parseFloat($('ldl').value);
+  const bmi = parseFloat($('bmi').value);
+  const ta = $('ta').value.trim();
+  $('kpi-a1c').textContent = isNaN(a1c)?'—':a1c.toFixed(1);
+  $('kpi-ldl').textContent = isNaN(ldl)?'—':ldl.toFixed(0);
+  $('kpi-bmi').textContent = isNaN(bmi)?'—':bmi.toFixed(1);
+  $('kpi-ta').textContent = ta || '—';
 
-        <hr>
-        <h2>E. Examen Físico y Laboratorio</h2>
-        <div class="form-section">
-            <label>FC (lpm):</label><input type="number" style="width: 80px;">
-            <label>TA (mmHg):</label><input type="text" style="width: 100px;">
-        </div>
+  flag('kpi-a1c-flag', !isNaN(a1c) && a1c <= UMBRALES.a1c_max);
+  flag('kpi-ldl-flag', !isNaN(ldl) && ldl <= UMBRALES.ldl_max);
 
-        <h3>Hallazgos Específicos</h3>
-        <div class="form-section simple-text-areas">
-            <div class="text-area-item"><label>PIEL:</label><textarea rows="1" placeholder="Normal / Acantosis / Úlceras / Dermopatía"></textarea></div>
-            <div class="text-area-item"><label>CARDIOVASCULAR:</label><textarea rows="1" placeholder="Soplos, Pulsos periféricos, Signos de IC"></textarea></div>
-            <div class="text-area-item"><label>RESPIRATORIO:</label><textarea rows="1" placeholder="Entrada de aire, Sibilancias, Rales"></textarea></div>
-            <div class="text-area-item"><label>NEUROLÓGICO:</label><textarea rows="1" placeholder="Nivel de conciencia, Déficit motor/sentitivo"></textarea></div>
-        </div>
+  let okPA = false;
+  if (ta && ta.includes('/')){
+    const [tas,tad] = ta.split('/').map(x=>parseInt(x,10));
+    okPA = Number.isFinite(tas) && Number.isFinite(tad) && tas < UMBRALES.tas_max && tad < UMBRALES.tad_max;
+  }
+  flag('kpi-ta-flag', okPA);
 
-        <h3>Laboratorio al Inicio del Seguimiento (Variables Completas)</h3>
-        <div class="lab-table">
-            <label>HEMOGRAMA:</label><input type="text">
-            <label>GLUCEMIA:</label><input type="text">
-            <label>HBA1C:</label><input type="text">
-            <label>UREA:</label><input type="text">
-            <label>CREATININA:</label><input type="text">
-            <label>IONOGRAMA:</label><input type="text">
-            <label>HEPATOGRAMA:</label><input type="text">
-            <label>PERFIL LIPÍDICO:</label><input type="text">
-            <label>TSH:</label><input type="text">
-            <label>ERITROSEDIMENTACIÓN:</label><input type="text">
-            <label>PCR:</label><input type="text">
-            <label>FERREMIA:</label><input type="text">
-            <label>FERRITINA:</label><input type="text">
-            <label>VITAMINA D:</label><input type="text">
-            <label>VITAMINA B12:</label><input type="text">
-        </div>
+  const okBMI = Number.isFinite(bmi) && bmi >= UMBRALES.bmi_min && bmi <= UMBRALES.bmi_max;
+  flag('kpi-bmi-flag', okBMI);
 
-        <hr>
-        <h2>F. Planificación de Seguimiento (Alarma de Contacto)</h2>
-        <div class="form-section full-width-group">
-            <label>NUEVO CONTROL:</label>
-            <select><option>Presencial</option><option>Virtual (Zoom/Video)</option><option>Mail</option></select>
-            <label>FECHA DE NUEVO CONTROL (ALARMA):</label>
-            <input type="date" required>
-        </div>
-        
-        <label>Indicaciones (INTERPAC):</label>
-        <textarea rows="3" placeholder="Estas indicaciones se verán en la plataforma del paciente."></textarea>
-        
-        <label>Objetivos para Próximo Control (INTERPAC):</label>
-        <textarea rows="2" placeholder="Ej: HbA1c < 7.0, Bajar 1 Kg."></textarea>
-        
-        <button type="submit" class="submit-btn">Guardar Ficha de Ingreso</button>
-    </form>
+  // Estado por próxima fecha
+  const prox = $('prox').value;
+  if (prox){
+    const d = Math.ceil((new Date(prox) - new Date())/(1000*60*60*24));
+    $('estado').value = isFinite(d) ? (d >= 0 ? 'al día' : 'atrasado') : 'sin fecha';
+  } else {
+    $('estado').value = 'sin fecha';
+  }
+}
+
+function flag(id, ok){
+  const el = $(id);
+  el.textContent = ok ? 'OK' : 'Revisar';
+  el.className = 'flag ' + (ok ? 'green' : 'red');
+  if (ok==null) { el.textContent = '—'; el.className = 'flag gray'; }
+}
+
+/* Guardar/Imprimir */
+$('btn-print').addEventListener('click', ()=> window.print());
+$('btn-save').addEventListener('click', saveDraft);
+
+/* Autosave/restore */
+const STORAGE_KEY = 'INTERPF_DBT2_FICHA';
+restoreDraft();
+form.addEventListener('input', debounce(saveDraft, 400));
+
+function saveDraft(e){
+  const data = Object.fromEntries(new FormData(form).entries());
+  // agrego algunos que son readonly/derivados
+  data.bmi = $('bmi').value;
+  data.rel_ca = $('rel-ca').value;
+  data.edad = $('edad-auto').value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  if (e?.type==='click') alert('Borrador guardado en este equipo.');
+}
+function restoreDraft(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  const data = JSON.parse(raw);
+  for (const [k,v] of Object.entries(data)){
+    const el = document.querySelector(`[name="${k}"]`) || $(k);
+    if (!el) continue;
+    if (el.type==='checkbox') el.checked = v === 'on' || v === true;
+    else el.value = v;
+  }
+  calcBody(); updateKPI();
+}
+
+/* Envío del formulario */
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  updateKPI();
+  alert('Ficha guardada localmente. (Podemos integrarla a correo/webhook cuando quieras).');
+});
+
+/* Limpiar */
+$('btn-clear').addEventListener('click', ()=>{
+  if (!confirm('¿Limpiar todos los campos?')) return;
+  form.reset();
+  localStorage.removeItem(STORAGE_KEY);
+  calcBody(); updateKPI();
+});
+
+/* Utilidad */
+function debounce(fn, ms=300){
+  let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn.apply(this,a), ms); };
+}
+</script>
 </body>
 </html>
